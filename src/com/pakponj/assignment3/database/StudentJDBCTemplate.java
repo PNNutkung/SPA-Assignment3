@@ -18,31 +18,31 @@ public class StudentJDBCTemplate implements StudentDAO {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 	public void create(String name, Float gpax, String ambition) {
-		String SQL = "insert into Student (name, gpax, ambition) values (?, ?, ?)";
+		String SQL = "INSERT INTO student (name, gpax, ambition) VALUES (?, ?, ?);";
 		jdbcTemplateObject.update( SQL, name, gpax, ambition);
 		System.out.println("Created Record Name = " + name + " GPAX = " + gpax + " Ambition = " + ambition);
 		return;
 	}
 	public Student getStudent(Integer id) {
-		String SQL = "select * from Student where id = ?";
+		String SQL = "SELECT * FROM student where id = ?;";
 		Student student = jdbcTemplateObject.queryForObject(SQL,
 				new Object[]{id}, new StudentMapper());
 		return student;
 	}
 	public List<Student> listStudents() {
-		String SQL = "select * from Student";
+		String SQL = "SELECT * FROM student;";
 		List <Student> students = jdbcTemplateObject.query(SQL,
 				new StudentMapper());
 		return students;
 	}
 	public void delete(Integer id){
-		String SQL = "delete from Student where id = ?";
+		String SQL = "DELETE FROM student WHERE id = ?;";
 		jdbcTemplateObject.update(SQL, id);
 		System.out.println("Deleted Record with ID = " + id );
 		return;
 	}
 	public void update(Integer id, String name, Float gpax, String ambition ){
-		String SQL = "update Student set name = ?, gpax = ?, ambition = ? where id = ?";
+		String SQL = "UPDATE student SET name = ?, gpax = ?, ambition = ? where id = ?;";
 		jdbcTemplateObject.update(SQL, name, gpax, ambition, id);
 		System.out.println("Updated Record with ID = " + id );
 		return;
